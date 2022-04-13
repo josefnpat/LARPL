@@ -1,12 +1,18 @@
+#!/bin/sh
+
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo "Please run this script as root" 
+   exit 1
+fi
+
 apt-get install lua5.3 lua5.3-dev luarocks redis tasksel php-pear
 
 tasksel install lamp-server
 
-# todo: add redis to systemd
-# sed -i /
-
+# Configure Redis to use Ubuntu's SystemD
+sed -i 's/supervised no/supervised systemd/h' /etc/redis/redis.conf
 systemctl restart redis
-
 echo "set test \"Hello World from Redis\"" | redis-cli
 
 pecl download php-lua
