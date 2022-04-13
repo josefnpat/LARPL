@@ -6,7 +6,7 @@ function main(argv)
   r.body = {}
   r.body.argv = argv
   
-  local client.connect("localhost",6379)
+  local client = redis.connect("localhost",6379)
   r.body.redis = client.get("test")
   
   return r
