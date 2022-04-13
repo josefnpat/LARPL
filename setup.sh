@@ -15,7 +15,7 @@ sed -i 's/supervised no/supervised systemd/g' /etc/redis/redis.conf
 systemctl restart redis
 echo "set test \"Hello World from Redis\"" | redis-cli
 
-# Setup the Lua module
+# Setup the php-lua module
 pecl channel-update pecl.php.net
 pecl download lua
 tar xvf lua-*.tgz
@@ -25,6 +25,9 @@ phpize
 make
 cp modules/lua.so /usr/lib/php/20190902/lua.so
 cd -
+
+# Setup the redis-lua module
+luarocks install redis-lua
 
 # Configure Apache2
 echo "; configuration for Lua module" > /etc/php/7.4/mods-available/lua.ini
