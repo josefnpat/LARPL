@@ -6,7 +6,7 @@ if [ `id -u` != 0 ]; then
 fi
 
 # Install depdendencies
-apt-get install lua5.3 lua5.3-dev luarocks redis tasksel php-pear php7.4-dev
+apt-get install -y lua5.3 lua5.3-dev luarocks redis tasksel php-pear php7.4-dev
 
 # Install a LAMP server because it's easy
 tasksel install lamp-server
